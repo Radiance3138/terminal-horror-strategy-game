@@ -17,3 +17,25 @@ class Room:
 
         self.neighbors[direction.lower()] = room_object
 
+    def add_item(self, item_object):
+        """The room takes ownership of the item."""
+        
+        self.items[item_object.name.lower()] = item_object
+
+class Item:
+    def __init__(self, name, descriptions, is_portable=True):
+
+        self.name = name
+        self.descriptions = descriptions 
+        self.current_desc_index = 0
+        self.is_portable = is_portable
+
+    def examine(self):
+        """Cycles through item descriptions or returns the last one."""
+        
+        desc = self.descriptions[self.current_desc_index]
+        
+        if self.current_desc_index < len(self.descriptions) - 1:
+            self.current_desc_index += 1
+        
+        return desc
